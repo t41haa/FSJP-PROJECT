@@ -90,21 +90,24 @@ h2 {
   /* REMOVED padding which was causing alignment issues */
 }
 
-.hole:after { /* This is the dirt mound */
+/* Find this rule in your style.css file */
+.hole:after { /* The dirt mound */
   display: block;
   background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1159990/dirt.svg")
     bottom center no-repeat;
-  background-size: contain; /* Use contain for better image scaling */
+  background-size: 100% 100%;
   content: "";
   width: 100%;
-  height: 90px;
+  height: 50%;
   position: absolute;
-  z-index: 2; /* Ensures dirt is ON TOP of the mole */
-  bottom: -30px; /* Pushes dirt down to create the "mound" effect */
+  z-index: 2;
+  bottom: -20%;
   left: 0;
   right: 0;
-  /* Darkens the dirt to match the theme */
   filter: brightness(0.6);
+  
+  /* --- ADD THIS LINE --- */
+  pointer-events: none; /* This makes the dirt mound 'click-through' */
 }
 
 .mole {
@@ -130,4 +133,5 @@ footer {
   text-align: center;
   font-size: 5rem;
   padding: 4rem 0 2rem 0; /* A bit less padding on the bottom */
+
 }
