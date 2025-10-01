@@ -43,7 +43,12 @@ function startGame() {
   }, 10000);
 }
 
+// ===== KEY CHANGE IS IN THIS FUNCTION =====
 function bonk(e) {
+  // This line prevents the browser from firing a 'click' event after a 'touchstart'
+  // This stops the score from being counted twice on a single tap.
+  e.preventDefault();
+
   if (!e.isTrusted) return; // ignore fake clicks
   score++;
   this.classList.remove("up");
@@ -51,4 +56,10 @@ function bonk(e) {
 }
 
 button.addEventListener("click", startGame);
-moles.forEach(mole => mole.addEventListener("click", bonk));
+
+// ===== AND THE SECOND CHANGE IS HERE =====
+moles.forEach(mole => {
+  mole.addEventListener("click", bonk);
+  // We now ALSO listen for the 'touchstart' event for mobile devices.
+  mole.addEventListener("touchstart", bonk, { passive: false });
+});
